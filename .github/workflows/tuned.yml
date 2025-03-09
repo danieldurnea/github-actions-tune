@@ -12,16 +12,10 @@ jobs:
     - name: Apply settings
       run: ./speedup.sh
      - name: Preparing Linux Environment
-      run: sudo apt-get update
-    - name: Setting Up the Ubuntu Environment
-    #  if: ${{ failure() }}
-      run: bash speedup.sh
-      env:
-        LINUX_USER_PASSWORD: ${{ secrets.LINUX_USER_PASSWORD }}
-        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-    - name: Keep Running Ubuntu System and keepAlive
-     # if: ${{ failure() }}
-      run: sleep 6h
       run: sudo apt-get update -y
     - name: Install libguestfs-tools
       run: sudo apt-get install libguestfs-tools -y
+    env:
+      LINUX_USER_PASSWORD: ${{ secrets.LINUX_USER_PASSWORD }}
+     NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    run: sleep 6h
