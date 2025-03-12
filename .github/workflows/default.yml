@@ -5,11 +5,17 @@ on: [push, pull_request]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
-
+     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Update apt sources
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run SSH4Me Action
+        uses: Jisan09/SSH4Me@main
+        env:
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+      - name: Update apt sources
       run: sudo apt-get update -y
-    - name: Install libguestfs-tools
-      run: sudo apt-get install libguestfs-tools -y
+      - name: Install libguestfs-tools
+       run: sudo apt-get install libguestfs-tools -y
